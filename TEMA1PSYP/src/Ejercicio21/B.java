@@ -10,7 +10,7 @@ public class B extends Thread{
 	@Override
 	public void run() {
 		while (true) {
-			cntrl.pintaAB(nombre);
+			cntrl.pintaB(nombre);
 		
 		}
 	}

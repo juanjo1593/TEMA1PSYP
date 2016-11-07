@@ -7,13 +7,14 @@ public class A extends Thread{
 	public A(Control control) {
 		this.nombre= "A";
 		this.cntrl=control;
+		currentThread().setName("A");
 	}
 	
 	@Override
 	public void run() {
 		while (true) {
-			cntrl.pintaAB(nombre);
-			yield();
+			cntrl.pintaA(nombre);
+			
 			
 		}
 	}
