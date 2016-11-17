@@ -5,9 +5,9 @@ public class Lector extends Thread{
 	int numIteracion;
 	String nombre;
 	
-	public Lector(Controlador contr) {
+	public Lector(Controlador contr,String nombre) {
 		this.contr=contr;
-		this.nombre="Lector";
+		this.nombre=nombre;
 		this.numIteracion=0;
 	}
 	@Override

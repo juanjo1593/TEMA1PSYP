@@ -5,9 +5,9 @@ public class Escritor extends Thread{
 	int numIteracion;
 	Controlador contr;
 	
-	public Escritor(Controlador contr) {
+	public Escritor(Controlador contr,String nombre) {
 		this.contr=contr;
-		nombre= "Escritor";
+		this.nombre= nombre;
 		this.numIteracion=0;
 		
 	}

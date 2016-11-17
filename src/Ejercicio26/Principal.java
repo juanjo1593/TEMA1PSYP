@@ -6,11 +6,11 @@ public class Principal {
 		Controlador cont= new Controlador();
 		
 		for (int i = 0; i < 3; i++) {
-			Lector lect= new Lector(cont);
+			Lector lect= new Lector(cont,"LECTOR-"+i);
 			lect.start();
 		}
 		for (int i = 0; i < 2; i++) {
-			Escritor escr= new Escritor(cont);
+			Escritor escr= new Escritor(cont,"ESCRITOR-"+i);
 			escr.start();
 		}
 
