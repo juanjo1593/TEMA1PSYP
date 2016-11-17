@@ -4,7 +4,7 @@ public class Aristoteles extends Thread{
 	String nombre;
 	Controlador contr;
 	public Aristoteles(Controlador contr) {
-		nombre= "Socrates";
+		nombre= "Aristoteles";
 		this.contr=contr;
 	}
 	
@@ -12,6 +12,7 @@ public class Aristoteles extends Thread{
 	public void run() {
 		for (int i = 0; i < 3; i++) {
 			contr.comeArist(nombre);
+			yield();
 		}
 	}
 

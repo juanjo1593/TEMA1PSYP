@@ -5,7 +5,7 @@ public class Hegel extends Thread{
 	String nombre;
 	Controlador contr;
 	public Hegel(Controlador contr) {
-		nombre= "Socrates";
+		nombre= "Hegel";
 		this.contr=contr;
 	}
 	
@@ -13,6 +13,7 @@ public class Hegel extends Thread{
 	public void run() {
 		for (int i = 0; i <3; i++) {
 			contr.comeHegel(nombre);
+			yield();
 		}
 		
 	}

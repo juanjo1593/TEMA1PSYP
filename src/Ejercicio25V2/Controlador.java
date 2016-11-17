@@ -4,88 +4,139 @@ import java.util.Arrays;
 
 public class Controlador {
 	int cont;
-	boolean [] palillos;
+	boolean[] palillos;
 
 	public Controlador() {
 		cont = 1;
-		palillos=new boolean [4];
+		palillos = new boolean[5];
 		Arrays.fill(palillos, false);
 	}
 
-	public   synchronized void comeHegel(String nombre) {
-		while (cont != 5) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public void comeHegel(String nombre) {
+		synchronized (this) {
+
+			while (palillos[0] == true | palillos[1] == true) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
-
+			palillos[0] = true;
+			palillos[1] = true;
 		}
-		System.out.println("\t\t\t\t"+nombre+" toma el palillod de la izquierda y la derecha, come y lo suelta.");
-		cont=1;
-		notifyAll();
-	}
 
-	public synchronized void comeArist(String nombre) {
-		while (cont != 4) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		System.out.println("\t\t\t" + nombre + " toma el palillod de la izquierda y la derecha, come y lo suelta.");
-		cont++;
-		notifyAll();
-	}
+		comer(nombre, 0, 1);
+		synchronized (this) {
 
-	public  synchronized void comeLocke(String nombre) {
-		while (cont != 3) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-		System.out.println("\t\t" + nombre + " toma el palillod de la izquierda y la derecha, come y lo suelta.");
-		cont++;
-		notifyAll();
-	}
-
-	public  synchronized void comeSocrates(String nombre) {
-		while (cont != 1) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-			System.out.println(nombre + " toma el palillod de la izquierda y la derecha, come y lo suelta.");
-			cont++;
+			System.out.println("El filosofo " + nombre + " SOLTÓ los dos palillos\n");
 			notifyAll();
-		
+		}
+	}
+
+	public void comer(String nombre, int i, int j) {
+		System.out.println(nombre + " cogió los dos palillos.");
+		System.out.println(nombre + " come.");
+
+		palillos[i] = false;
+		palillos[j] = false;
 
 	}
 
-	public  synchronized void comeKant(String nombre) {
-		while (cont != 2) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void comeArist(String nombre) {
+		synchronized (this) {
 
+			while (palillos[1] == true | palillos[2] == true) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			palillos[1] = true;
+			palillos[2] = true;
 		}
-		System.out.println("\t" + nombre + " toma el palillod de la izquierda y la derecha, come y lo suelta.");
-		cont++;
-		notifyAll();
+		comer(nombre, 1, 2);
+		synchronized (this) {
+
+			System.out.println("El filosofo " + nombre + " SOLTÓ los dos palillos\n");
+			notifyAll();
+		}
+	}
+
+	public void comeLocke(String nombre) {
+		synchronized (this) {
+
+			while (palillos[2] == true | palillos[3] == true) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			palillos[2] = true;
+			palillos[3] = true;
+		}
+		comer(nombre, 2, 3);
+		synchronized (this) {
+
+			System.out.println("El filosofo " + nombre + " SOLTÓ los dos palillos\n");
+			notifyAll();
+		}
+	}
+
+	public void comeSocrates(String nombre) {
+		synchronized (this) {
+
+			while (palillos[3] == true | palillos[4] == true) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			palillos[3] = true;
+			palillos[4] = true;
+		}
+
+		comer(nombre, 3, 4);
+
+		synchronized (this) {
+			System.out.println("El filosofo " + nombre + " SOLTÓ los dos palillos\n");
+			notifyAll();
+		}
+
+	}
+
+	public void comeKant(String nombre) {
+		synchronized (this) {
+
+			while (palillos[4] == true | palillos[0] == true) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			palillos[4] = true;
+			palillos[0] = true;
+		}
+		comer(nombre, 4, 0);
+		synchronized (this) {
+
+			System.out.println("El filosofo " + nombre + " SOLTÓ los dos palillos\n");
+			notifyAll();
+		}
 	}
 
 }

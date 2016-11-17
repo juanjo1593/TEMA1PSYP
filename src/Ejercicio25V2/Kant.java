@@ -12,6 +12,7 @@ public class Kant extends Thread {
 	public void run() {
 		for (int i = 0; i < 3; i++) {
 			contr.comeKant(nombre);
+			yield();
 		}
 	}
 }
