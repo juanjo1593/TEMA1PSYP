@@ -13,6 +13,9 @@ public class Lector extends Thread{
 	@Override
 	public void run() {
 		for (int i = 0; i < 5; i++) {
+			contr.entraLector();
+			contr.actualLector(nombre, i);
+			contr.saleLector();
 			
 		}
 	}
